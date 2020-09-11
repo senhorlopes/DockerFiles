@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    volumes:
+      - /Users/srlopes/Programas/docker_volumes/mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: Usuario_123
+      MONGO_INITDB_ROOT_PASSWORD: Senha_123
+    ports:
+      - "27017:27017"

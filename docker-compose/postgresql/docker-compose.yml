@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgresql
+    image: postgres
+    environment:
+      POSTGRES_USER: Usuario_123
+      POSTGRES_PASSWORD: Senha_123
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
+    volumes: 
+        - /Users/srlopes/Programas/docker_volumes/postgres:/data/postgres
+    networks: 
+      - postgres-network
+    restart: unless-stopped
+  
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks: 
+      - postgres-network
+    depends_on: 
+        - postgres 
+    restart: unless-stopped
+
+networks:
+  postgres-network:
+    driver: bridge

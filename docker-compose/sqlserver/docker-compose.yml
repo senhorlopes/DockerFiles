@@ -1,0 +1,12 @@
+version: "3"
+services:
+  sqlserver:
+    container_name: sqlserver
+    image: microsoft/mssql-server-linux
+    ports:
+      - "1433:1433"
+    volumes:
+      - /Users/srlopes/Programas/docker_volumes/sqlserver:/var/opt/mssql
+    environment:
+      SA_PASSWORD: "Senha_123"
+      ACCEPT_EULA: "Y"
